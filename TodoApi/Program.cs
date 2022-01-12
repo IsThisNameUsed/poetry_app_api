@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<TodoContext>(opt =>
-    opt.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=TODO_API;Trusted_Connection=True"));
+    opt.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=poetry_database;Trusted_Connection=True"));
 //builder.Services.AddSwaggerGen(c =>
 //{
 //    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });

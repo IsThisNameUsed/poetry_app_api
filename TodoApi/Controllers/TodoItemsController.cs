@@ -25,7 +25,7 @@ namespace TodoApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
         {
-            return await _context.TodoItem.Select(x => ItemToDTO(x))
+            return await _context.PoemItem.Select(x => ItemToDTO(x))
                 .ToListAsync();
         }
 
@@ -33,14 +33,14 @@ namespace TodoApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItemDTO>> GetTodoItem(int id)
         {
-            var todoItem = await _context.TodoItem.FindAsync(id);
+            var poemitem = await _context.PoemItem.FindAsync(id);
 
-            if (todoItem == null)
+            if (poemitem == null)
             {
                 return NotFound();
             }
 
-            return ItemToDTO(todoItem);
+            return ItemToDTO(poemitem);
         }
 
         // PUT: api/TodoItems/5
@@ -53,14 +53,13 @@ namespace TodoApi.Controllers
                 return BadRequest();
             }
 
-            var todoItem = await _context.TodoItem.FindAsync(id);
+            var todoItem = await _context.PoemItem.FindAsync(id);
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            todoItem.Name = todoItemDTO.Name;
-            todoItem.IsComplete = todoItemDTO.IsComplete;
+            todoItem.Poem = todoItemDTO.Poem;
 
             try
             {
@@ -79,13 +78,12 @@ namespace TodoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoItemDTO)
         {
-            var todoItem = new TodoItem
+            var todoItem = new PoemItem
             {
-                IsComplete = todoItemDTO.IsComplete,
-                Name = todoItemDTO.Name
+                Poem = todoItemDTO.Poem
             };
 
-            _context.TodoItem.Add(todoItem);
+            _context.PoemItem.Add(todoItem);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, ItemToDTO(todoItem));
@@ -96,13 +94,13 @@ namespace TodoApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {
-            var todoItem = await _context.TodoItem.FindAsync(id);
+            var todoItem = await _context.PoemItem.FindAsync(id);
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItem.Remove(todoItem);
+            _context.PoemItem.Remove(todoItem);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -110,15 +108,14 @@ namespace TodoApi.Controllers
 
         private bool TodoItemExists(long id)
         {
-            return _context.TodoItem.Any(e => e.Id == id);
+            return _context.PoemItem.Any(e => e.Id == id);
         }
 
-        private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
+        private static TodoItemDTO ItemToDTO(PoemItem todoItem) =>
            new TodoItemDTO
            {
                Id = todoItem.Id,
-               Name = todoItem.Name,
-               IsComplete = todoItem.IsComplete
+               Poem = todoItem.Poem,
            };
     }
 }
