@@ -4,6 +4,8 @@
     {
         public int Id { get; set; }
         public string? Poem { get; set; }
+
+        public string? dateTime { get; set; }
     }
 
 
@@ -11,6 +13,8 @@
     {
         public int Id { get; set; }
         public string? Poem { get; set; }
+
+        public string? dateTime { get; set; }
     }
 
 }

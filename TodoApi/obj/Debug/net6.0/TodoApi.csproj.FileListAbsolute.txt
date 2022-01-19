@@ -787,3 +787,5 @@ D:\Developpement\repos\Poetry_App_API\TodoApi\obj\Debug\net6.0\TodoApi.dll
 D:\Developpement\repos\Poetry_App_API\TodoApi\obj\Debug\net6.0\ref\TodoApi.dll
 D:\Developpement\repos\Poetry_App_API\TodoApi\obj\Debug\net6.0\TodoApi.pdb
 D:\Developpement\repos\Poetry_App_API\TodoApi\obj\Debug\net6.0\TodoApi.genruntimeconfig.cache
+D:\Developpement\repos\Poetry_App_API\TodoApi\obj\Debug\net6.0\TodoApi.Properties.Resources.resources
+D:\Developpement\repos\Poetry_App_API\TodoApi\obj\Debug\net6.0\TodoApi.csproj.GenerateResource.cache

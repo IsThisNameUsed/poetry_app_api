@@ -17,8 +17,14 @@ namespace TodoApi.Controllers
         private readonly TodoContext _context;
 
         public TodoItemsController(TodoContext context)
-        {
+        {       
             _context = context;
+            DataManager.SetController(this);
+        }
+
+        public TodoContext GetContext()
+        {
+            return _context;
         }
 
         // GET: api/TodoItems
@@ -45,33 +51,33 @@ namespace TodoApi.Controllers
 
         // PUT: api/TodoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(long id, TodoItemDTO todoItemDTO)
-        {
-            if (id != todoItemDTO.Id)
-            {
-                return BadRequest();
-            }
+        /* [HttpPut("{id}")]
+         public async Task<IActionResult> PutTodoItem(long id, TodoItemDTO todoItemDTO)
+         {
+             if (id != todoItemDTO.Id)
+             {
+                 return BadRequest();
+             }
 
-            var todoItem = await _context.PoemItem.FindAsync(id);
-            if (todoItem == null)
-            {
-                return NotFound();
-            }
+             var todoItem = await _context.PoemItem.FindAsync(id);
+             if (todoItem == null)
+             {
+                 return NotFound();
+             }
 
-            todoItem.Poem = todoItemDTO.Poem;
+             todoItem.Poem = todoItemDTO.Poem;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException) when (!TodoItemExists(id))
-            {
-                return NotFound();
-            }
+             try
+             {
+                 await _context.SaveChangesAsync();
+             }
+             catch (DbUpdateConcurrencyException) when (!TodoItemExists(id))
+             {
+                 return NotFound();
+             }
 
-            return NoContent();
-        }
+             return NoContent();
+         }*/
 
         // POST: api/TodoItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -82,6 +88,7 @@ namespace TodoApi.Controllers
             {
                 Poem = todoItemDTO.Poem
             };
+            todoItem.dateTime = DateTime.Now.ToString();
 
             _context.PoemItem.Add(todoItem);
             await _context.SaveChangesAsync();
@@ -90,9 +97,10 @@ namespace TodoApi.Controllers
             return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
 
+
         // DELETE: api/TodoItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoItem(long id)
+        public async Task<IActionResult> DeleteTodoItem(int id)
         {
             var todoItem = await _context.PoemItem.FindAsync(id);
             if (todoItem == null)
@@ -111,11 +119,12 @@ namespace TodoApi.Controllers
             return _context.PoemItem.Any(e => e.Id == id);
         }
 
-        private static TodoItemDTO ItemToDTO(PoemItem todoItem) =>
+        public static TodoItemDTO ItemToDTO(PoemItem todoItem) =>
            new TodoItemDTO
            {
                Id = todoItem.Id,
                Poem = todoItem.Poem,
+               dateTime = todoItem.dateTime
            };
     }
 }
