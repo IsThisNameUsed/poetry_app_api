@@ -44,7 +44,7 @@ namespace TodoApi
                 DateTime datetime = Convert.ToDateTime(item.dateTime);
                 TimeSpan timeSpan = DateTime.Now - datetime;
                 Console.WriteLine(timeSpan.TotalSeconds);
-                if(timeSpan.TotalSeconds > 20)
+                if(timeSpan.TotalSeconds > 600)
                 {
                     IActionResult taskResult = await DeleteItem(item.Id);
                 }

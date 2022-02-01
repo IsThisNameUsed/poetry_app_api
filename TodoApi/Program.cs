@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using TodoApi.Controllers;
 
 
-DataManager.StringToDateTime();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
