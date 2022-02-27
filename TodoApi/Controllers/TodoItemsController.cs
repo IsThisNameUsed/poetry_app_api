@@ -35,6 +35,14 @@ namespace TodoApi.Controllers
                 .ToListAsync();
         }
 
+        [HttpGet("page/{page}")]
+        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItemPage(int page)
+        {
+            int skipValue = (page - 1) * 5;
+            skipValue = Math.Max(skipValue, 0);
+            return await _context.PoemItem.Select (x => ItemToDTO(x)).Skip(skipValue).Take(10).ToListAsync();
+        }
+
         // GET: api/TodoItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItemDTO>> GetTodoItem(int id)

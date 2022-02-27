@@ -20,7 +20,7 @@
         {
             timer = new Timer(async o => {
                 Interlocked.Increment(ref number);
-                logger.LogInformation($"Printing the worker number {number}");
+                //logger.LogInformation($"Printing the worker number {number}");
                 if(DataManager.IsReady())
                     DataManager.MajDatabase();
             },

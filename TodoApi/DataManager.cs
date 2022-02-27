@@ -40,14 +40,14 @@ namespace TodoApi
             IEnumerable<TodoItemDTO> list = task.Result.Value;
             foreach (TodoItemDTO item in list)
             {
-                Console.WriteLine(item.Poem + item.dateTime + "id=" + item.Id);
+                //Console.WriteLine(item.Poem + item.dateTime + "id=" + item.Id);
                 DateTime datetime = Convert.ToDateTime(item.dateTime);
                 TimeSpan timeSpan = DateTime.Now - datetime;
-                Console.WriteLine(timeSpan.TotalSeconds);
-                if(timeSpan.TotalSeconds > 600)
+                //Console.WriteLine(timeSpan.TotalSeconds);
+                /*if(timeSpan.TotalSeconds > 600)
                 {
                     IActionResult taskResult = await DeleteItem(item.Id);
-                }
+                }*/
             }     
         }
 
